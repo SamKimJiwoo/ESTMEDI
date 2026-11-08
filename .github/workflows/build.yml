@@ -10,12 +10,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Compile C++ Code
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Compile C++ with MSBuild (cl.exe)
       run: |
-        g++ main.cpp -o ESTMEDI.exe
+        cl /EHsc main.cpp /Fe:ESTMEDI.exe
 
     - name: Upload EXE artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ESTMEDI-C++-EXE
+        name: ESTMEDI-CPP-EXE
         path: ESTMEDI.exe
