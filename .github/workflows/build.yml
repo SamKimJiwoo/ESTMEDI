@@ -10,11 +10,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
-
-    - name: Compile C++ with MSBuild (cl.exe)
+    - name: Compile C++ using MSVC
+      shell: cmd
       run: |
+        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
         cl /EHsc main.cpp /Fe:ESTMEDI.exe
 
     - name: Upload EXE artifact
