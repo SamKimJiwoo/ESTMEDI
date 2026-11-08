@@ -1,0 +1,24 @@
+name: Build C++ ESTMEDI to EXE
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Add MSBuild to PATH (or use MinGW)
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Compile C++ Code
+      run: |
+        cl.exe /EHsc main.cpp /Fe:ESTMEDI.exe
+
+    - name: Upload EXE artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ESTMEDI-C++-EXE
+        path: ESTMEDI.exe
