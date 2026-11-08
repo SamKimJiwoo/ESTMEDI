@@ -10,12 +10,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Add MSBuild to PATH (or use MinGW)
-      uses: ilammy/msvc-dev-cmd@v1
+    - name: Set up MinGW
+      uses: egor-tukin/setup-mingw@v2
+      with:
+        version: 12.2.0
 
-    - name: Compile C++ Code
+    - name: Compile C++ Code with g++
       run: |
-        cl.exe /EHsc main.cpp /Fe:ESTMEDI.exe
+        g++ main.cpp -o ESTMEDI.exe -static
 
     - name: Upload EXE artifact
       uses: actions/upload-artifact@v3
