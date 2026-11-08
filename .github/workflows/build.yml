@@ -10,14 +10,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up MinGW
-      uses: egor-tukin/setup-mingw@v2
-      with:
-        version: 12.2.0
-
-    - name: Compile C++ Code with g++
+    - name: Compile C++ Code
       run: |
-        g++ main.cpp -o ESTMEDI.exe -static
+        g++ main.cpp -o ESTMEDI.exe
 
     - name: Upload EXE artifact
       uses: actions/upload-artifact@v3
